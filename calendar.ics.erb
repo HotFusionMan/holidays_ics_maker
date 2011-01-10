@@ -1,0 +1,49 @@
+<%
+require 'date'
+%>
+
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+VERSION:2.0
+CALSCALE:GREGORIAN
+<%
+=begin
+X-WR-CALNAME:Calendar
+PRODID:-//Apple Inc.//iCal 4.0.4//EN
+X-APPLE-CALENDAR-COLOR:#0252D4
+X-WR-TIMEZONE:America/Los_Angeles
+=end
+%>
+<%
+q(
+Jan. 3, 2011 Feb. 21, 2011 April 25, 2011 May 30, 2011 July 4, 2011 Sept. 5, 2011 Nov. 24, 2011 Nov. 25, 2011 Dec. 26, 2011 Dec. 27, 2011
+)
+q(
+Monday - New Year's Day Observed Monday - Presidents’ Day Holiday Monday – Easter Sunday Observed Monday - Memorial Day Holiday Monday - Independence Day Holiday Monday - Labor Day Holiday Thursday - Thanksgiving Day Holiday Friday - Day after Thanksgiving Holiday Monday – Christmas Day Observed Tuesday – After Christmas Day (Assigned)
+)
+
+.each { || %>
+BEGIN:VEVENT
+CREATED:<%=20110103T182042Z%>
+DTSTAMP:<%=20110103T182231Z%>
+
+<%
+d = Date.parse(  ).to_s.gsub( /-/, '' )
+%>
+DTSTART;VALUE=DATE:<%=d%>
+DTEND;VALUE=DATE:<%=d%>
+SUMMARY:<%=.split[2..-1].join( ' ' )%>
+
+TRANSP:TRANSPARENT
+SEQUENCE:2
+
+BEGIN:VALARM
+TRIGGER:<%=-P2WT15H%>
+<%
+ATTACH;VALUE=URI:Sosumi
+%>
+ACTION:AUDIO
+END:VALARM
+END:VEVENT
+<% } %>
+END:VCALENDAR
